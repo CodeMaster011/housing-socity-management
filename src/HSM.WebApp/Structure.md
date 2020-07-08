@@ -13,6 +13,8 @@ Following features are needed in the system,
             -   Bank
             -   Expenses
             -   Collection
+            -   Expense-Due
+            -   Collection-Due
     *   Grivance mangement
             -   Create operation
             -   Update in statges
@@ -21,3 +23,7 @@ Following features are needed in the system,
             -   Topic (created by management)
             -   Voting by members
             -   Result - (by ownership area/ by person count)
+
+Migration commands,
+- dotnet ef migrations add InitialCreate
+- dotnet ef database update

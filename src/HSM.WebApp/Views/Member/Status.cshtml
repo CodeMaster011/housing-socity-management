@@ -1,0 +1,24 @@
+@model HSM.WebApp.Models.MemberCreationStatusModel
+
+@{
+    ViewData["Title"] = "Member";
+}
+
+
+@if(Model.Errors == null || Model.Errors.Count == 0)
+{
+  <div class="alert alert-success" role="alert">
+    @Model.Member.Name is succesfully created.
+  </div>
+} else
+{
+  <div class="alert alert-danger" role="alert">
+    Following errors are noted during creation,
+    <ul>
+      @foreach (var errorText in Model.Errors)
+      {
+        <li>@errorText</li>
+      }
+    </ul>
+  </div>
+}

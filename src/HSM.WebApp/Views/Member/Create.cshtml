@@ -1,0 +1,61 @@
+@model HSM.WebApp.Data.Models.Member
+@{
+    ViewData["Title"] = "Member";
+}
+
+<h4>Create new member</h1>
+
+<div>
+    <form method="post">
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Basic</h5>
+                <div class="form-group">
+                    <label for="inputName">Name (*)</label>
+                    <input type="text" class="form-control" id="inputName" asp-for="Name">
+                </div>
+                <div class="form-group">
+                    <label for="inputGender">Gender</label>
+                    <select class="form-control" id="inputGender" asp-for="Gender">
+                        <option value=0>None</option>
+                        <option value=1>Male</option>
+                        <option value=2>Female</option>
+                        <option value=3>Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Contact</h5>
+                <div class="form-group">
+                    <label for="inputPhoneNumber">Phone</label>
+                    <input type="text" class="form-control" id="inputPhoneNumber" asp-for="PhoneNumber">
+                    <small id="phoneHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="inputEMail">E-Mail</label>
+                    <input type="text" class="form-control" id="inputEMail" asp-for="EMail">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Others</h5>
+                <div class="form-group">
+                    <label for="inputOriginallyFrom">Originally From</label>
+                    <input type="text" class="form-control" id="inputOriginallyFrom" asp-for="OriginallyFrom">
+                </div>
+                <div class="form-group">
+                    <label for="inputOccupation">Occupation</label>
+                    <input type="text" class="form-control" id="inputOccupation" asp-for="Occupation">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary mt-3" type="submit">Create Member</button>
+    </form>
+</div>
