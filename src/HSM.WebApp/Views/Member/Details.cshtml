@@ -3,4 +3,50 @@
     ViewData["Title"] = "Member";
 }
 
+
+<div class="text-center">
+    <h1 class="display-4">Members</h1>
+</div>
+
 <h2>@Model.Name</h2>
+@if(Model.MemberFrom.HasValue)
+{
+    <h6>Member since, @Model.MemberFrom?.ToString("dd MMM, yyyy")</h6>
+}
+
+
+<div class="mt-5">
+    <h3>Contracts Details:</h3>
+    <table class="table table-strip">
+        <tbody>
+            <tr>
+                <th>Phone</th>
+                <td>@Model.PhoneNumber</td>
+            </tr>
+            <tr>
+                <th>E-Mail</th>
+                <td>@Model.EMail</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-5">
+    <h3>Additional Details:</h3>
+    <table class="table table-strip">
+        <tbody>
+            <tr>
+                <th>Occupation</th>
+                <td>@Model.Occupation</td>
+            </tr>
+            <tr>
+                <th>Birthday on</th>
+                <td>@Model.DOB?.ToString("dd MMM, yyyy")</td>
+            </tr>
+            <tr>
+                <th>Originally From</th>
+                <td>@Model.OriginallyFrom</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
