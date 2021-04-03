@@ -17,6 +17,7 @@ namespace HSM.WebApp.Data.Models
         public string EMail { get; set; }
 
         public ICollection<Unit> OwnedUnits { get; set; }
+        public MemberAccount Account { get; set; }
 
         public DateTime? MemberFrom { get; set; } // Time when he/she was activated as member
         

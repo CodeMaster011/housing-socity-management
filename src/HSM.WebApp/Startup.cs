@@ -30,7 +30,9 @@ namespace HSM.WebApp
 
             // DB Connection and DB Context setup
             services.AddDbContext<HsmDbContext>(options => {
-                options.UseMySql(Configuration.GetConnectionString("DbConnextion"));
+                options.UseMySql(
+                    Configuration.GetConnectionString("DbConnextion"), 
+                    ServerVersion.AutoDetect(Configuration.GetConnectionString("DbConnextion")));
             });
         }
 

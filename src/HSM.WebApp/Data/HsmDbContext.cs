@@ -7,6 +7,9 @@ namespace HSM.WebApp.Data
     {
         public DbSet<Member> Members { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<Ledger> Ledgers { get; set; }
+        public DbSet<MemberAccount> MemberAccounts { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public HsmDbContext(DbContextOptions options) : base(options)
         {
