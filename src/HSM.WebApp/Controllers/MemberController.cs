@@ -70,5 +70,11 @@ namespace HSM.WebApp.Controllers
 
             return View("Status", status);
         }
+
+        public async Task<IActionResult> Details(string id)
+        {
+            var member = await _dbContext.Members.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+            return View(member);
+        }
     }
 }
