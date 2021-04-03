@@ -1,0 +1,38 @@
+@model HSM.WebApp.Data.Models.Unit[]
+@{
+    ViewData["Title"] = "Units";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Units</h1>
+</div>
+
+<div>
+    <a class="btn btn-primary" href="/units/create" role="button">Create</a>
+</div>
+
+
+@* card/ table *@
+<table class="mt-3 table">
+    <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Area</th>
+        <th>Owner</th>
+        <th>Rented</th>
+    </thead>
+    <tbody>
+        @{var x = 1;}
+        @foreach (var unit in Model)
+        {
+            <tr>
+                <td>@x</td>
+                <td><a href="/units/details/@unit.Id">@unit.Name</a></td> @* links to details *@
+                <td>@unit.Area</td>
+                <td>@unit.Owner?.Name</td>
+                <td>@unit.IsRented</td>
+            </tr>
+            x++;
+        }
+    </tbody>
+</table>

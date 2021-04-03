@@ -45,6 +45,7 @@ namespace HSM.WebApp.Controllers
                 Member = model,
                 Errors = new System.Collections.Generic.List<string>()
             };
+
             // data validation to be done here
             if(string.IsNullOrEmpty(model.Name))
                 status.Errors.Add("Name of member is not specified.");
@@ -73,8 +74,39 @@ namespace HSM.WebApp.Controllers
 
         public async Task<IActionResult> Details(string id)
         {
-            var member = await _dbContext.Members.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+            var member = await _dbContext.Members.AsNoTracking()
+                .Include(m => m.Account)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (member.Account != null)
+            {
+                var transactions = await _dbContext.Transactions.AsNoTracking()
+                .Where(t => t.AccountId == member.Account.Id)
+                .OrderByDescending(t => t.Date)
+                .Take(5)
+                .ToArrayAsync();
+                member.Account.Transactions = transactions;
+            }
             return View(member);
+        }
+
+        public async Task<IActionResult> AddMemberTransactionAccount(string memberId)
+        {
+            var member = await _dbContext.Members.AsNoTracking()
+                .Include(m => m.Account)
+                .FirstOrDefaultAsync(m => m.Id == memberId);
+            if (member.Account == null)
+            {
+                _dbContext.MemberAccounts.Add(new MemberAccount
+                {
+                    ActivatedOn = DateTime.Now,
+                    Balance = 0d,
+                    CalculatedOn = DateTime.Now,
+                    MemberId = memberId
+                });
+                if (await _dbContext.SaveChangesAsync() > 0)
+                    return RedirectToActionPermanent(nameof(Details),new { id = memberId });
+            }
+            return RedirectToActionPermanent(nameof(Index));
         }
     }
 }

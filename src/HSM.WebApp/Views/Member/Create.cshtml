@@ -25,6 +25,12 @@
                                 <option value=3>Other</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="dob">DOB</label>
+                            <input type="text" id="dob" class="form-control" id="dob" asp-for="DOB">
+                            <small id="dobHelp" class="form-text text-muted">We'll never share your DOB with anyone else.</small>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -59,6 +65,10 @@
                             <label for="inputOccupation">Occupation</label>
                             <input type="text" class="form-control" id="inputOccupation" asp-for="Occupation">
                         </div>
+                        <div class="form-group">
+                            <label for="memberFrom">Member From</label>
+                            <input type="text" id="memberFrom" class="form-control" id="memberFrom" asp-for="MemberFrom" value='@DateTime.Now.ToString("d/M/y")'>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,3 +77,22 @@
         <button class="btn btn-primary mt-3" type="submit">Create Member</button>
     </form>
 </div>
+
+@section Scripts
+{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#memberFrom").datepicker({
+                dateFormat: 'd/m/yy',
+            });
+        });
+        $(function () {
+            $("#dob").datepicker({
+                dateFormat: 'd/m/yy',
+            });
+        });
+    </script>
+}
