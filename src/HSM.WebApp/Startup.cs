@@ -52,6 +52,13 @@ namespace HSM.WebApp
             // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.Use((context, next) =>
+            {
+                using var scope = app.ApplicationServices.CreateScope();
+                scope.ServiceProvider.GetService<HsmDbContext>()?.Database.MigrateAsync().GetAwaiter().GetResult();
+                return next();
+            });
+
             app.UseRouting();
 
             app.UseAuthorization();
