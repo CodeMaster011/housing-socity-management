@@ -1,0 +1,80 @@
+@model HSM.WebApp.Data.Models.Member
+@inject ISmallIdService smallIdService
+@{
+    ViewData["Title"] = "Member";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Members</h1>
+</div>
+
+<h2>@Model.Name</h2>
+<h6>@smallIdService.GetSmallId(Model)</h6>
+@if (Model.MemberFrom.HasValue)
+{
+    <div>Member since, @Model.MemberFrom?.ToString("dd MMM, yyyy")</div>
+}
+
+
+<div class="mt-5">
+    <h3>Contracts Details:</h3>
+    <table class="table table-strip">
+        <tbody>
+            <tr>
+                <th>Phone</th>
+                <td>@Model.PhoneNumber</td>
+            </tr>
+            <tr>
+                <th>E-Mail</th>
+                <td>@Model.EMail</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-5">
+    <h3>Additional Details:</h3>
+    <table class="table table-strip">
+        <tbody>
+            <tr>
+                <th>Occupation</th>
+                <td>@Model.Occupation</td>
+            </tr>
+            <tr>
+                <th>Birthday on</th>
+                <td>@Model.DOB?.ToString("dd MMM, yyyy")</td>
+            </tr>
+            <tr>
+                <th>Originally From</th>
+                <td>@Model.OriginallyFrom</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-5">
+    <h3>Owned Units:</h3>
+    <table class="table table-strip">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Area</th>
+                <th>Rented Person</th>
+                <th>Rented Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach(var unit in Model.OwnedUnits)
+            {
+                <tr>
+                    <td><a href="/units/details/@unit.Id">@unit.Name</a></td>
+                    <td>@unit.Area Squrt Feet</td>
+                    <td>@unit.RentedPersonName</td>
+                    <td>@unit.RentedPersonPhone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/units/create?ownerId=@smallIdService.GetSmallId(Model)">Create Unit</a>
+</div>

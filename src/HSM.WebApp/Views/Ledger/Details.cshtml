@@ -1,0 +1,70 @@
+@model HSM.WebApp.Data.Models.Ledger
+@{
+    ViewData["Title"] = "Ledger";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Ledgers</h1>
+</div>
+
+<h2>@Model.Name</h2>
+
+
+<div class="mt-5">
+    <h3>Details:</h3>
+    <table class="table table-strip">
+        <tbody>
+            <tr>
+                <th>Balance</th>
+                <td>@Model.Balance</td>
+            </tr>
+            <tr>
+                <th>CalculatedOn</th>
+                <td>@Model.CalculatedOn?.ToString("dd MMM, yyyy")</td>
+            </tr>
+            <tr>
+                <th>IsDue</th>
+                <td>@Model.IsDue</td>
+            </tr>
+            <tr>
+                <th>IsLocked</th>
+                <td>@Model.IsLocked</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-5">
+    <h3>Transaction Units:</h3>
+    <table class="table table-strip">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>IsDue</th>
+                <th>IsContra</th>
+                <th>Related</th>
+            </tr>
+        </thead>
+        <tbody>
+           @{var x = 1;}
+           @foreach(var tra in Model.Transactions)
+            {
+                <tr>
+                    <td>@x</td>
+                    <td><a href="/units/details/@tra.Id">@tra.Date?.ToString("dd MMM, yyyy")</a></td>
+                    <td>@tra.Description</td>
+                    <td>@tra.Amount</td>
+                    <td>@tra.IsDue</td>
+                    <td>@tra.IsContra</td>
+                    <td>&nbsp;</td>
+                </tr>
+                x++;
+            }
+        </tbody>
+    </table>
+    @* <a class="btn btn-primary" href="/units/create?ownerId=@smallIdService.GetSmallId(Model)">Create Unit</a> *@
+</div>

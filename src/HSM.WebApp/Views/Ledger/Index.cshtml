@@ -1,0 +1,44 @@
+@model HSM.WebApp.Data.Models.Ledger[]
+@{
+    ViewData["Title"] = "Ledger";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Ledger</h1>
+</div>
+
+<div>
+    <a class="btn btn-primary" href="/ledger/create" role="button">Create</a>
+</div>
+@* <div class="btn-group" role="group" aria-label="Basic example">
+    
+    <a class="btn btn-primary" href="#" role="button">Link</a>
+</div> *@
+
+
+@* card/ table *@
+<table class="mt-3 table">
+    <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>CalculatedOn</th>
+        <th>IsDue</th>
+        <th>IsLocked</th>
+    </thead>
+    <tbody>
+        @{var x = 1;}
+        @foreach (var ledger in Model)
+        {
+            <tr>
+                <td>@x</td>
+                <td><a href="/ledger/details/@ledger.Id">@ledger.Name</a></td> @* links to details *@
+                <td>@ledger.Balance</td>
+                <td>@ledger.CalculatedOn</td>
+                <td>@ledger.IsDue</td>
+                <td>@ledger.IsLocked</td>
+            </tr>
+            x++;
+        }
+    </tbody>
+</table>

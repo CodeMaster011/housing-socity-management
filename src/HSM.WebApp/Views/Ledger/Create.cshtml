@@ -1,0 +1,37 @@
+@model HSM.WebApp.Data.Models.Ledger
+@{
+    ViewData["Title"] = "Ledger";
+}
+
+<h4>Create new ledger</h1>
+
+<div>
+    <form method="post">
+        <div class="row">
+            <div class="col-12 col-lg-4 p-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Basic</h5>
+                        <div class="form-group">
+                            <label for="inputName">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="inputName" asp-for="Name">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="IsDue" asp-for="IsDue">
+                            <label class="form-check-label" for="IsDue">
+                                Is Due based
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="IsLocked" asp-for="IsLocked">
+                            <label class="form-check-label" for="IsLocked">
+                                Is Locked
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary mt-3" type="submit">Create Ledger</button>
+    </form>
+</div>
