@@ -38,11 +38,12 @@ namespace HSM.WebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm]Member model)
         {
-            var status = new MemberCreationStatusModel
+            var status = new StatusModel<Member>
             {
-                Member = model,
+                Model = model,
                 Errors = new System.Collections.Generic.List<string>()
             };
 
@@ -56,13 +57,18 @@ namespace HSM.WebApp.Controllers
                 return View("Status", status);
              
             model.Id = Guid.NewGuid().ToString();
+            model.OwnedUnits = null;
+            model.Account = null;
+            model.LastUpdatedOn = DateTime.Now;
+
+            model.Account = new MemberAccount { Member = model };
             _dbContext.Members.Add(model);
             try
             {
                 if(await _dbContext.SaveChangesAsync() <= 0)
                     status.Errors.Add("Failed to update Database. There may be connection error. Contact administrator now.");
                 
-                status.MemberId = model.Id;
+                status.ModelId = model.Id;
             }
             catch (System.Exception e)
             {
@@ -76,6 +82,7 @@ namespace HSM.WebApp.Controllers
         {
             var member = await _dbContext.Members.AsNoTracking()
                 .Include(m => m.Account)
+                .Include(m => m.OwnedUnits)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (member.Account != null)
             {

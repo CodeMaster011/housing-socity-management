@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HSM.WebApp.Data.Models
 {
-    public class Member
+    public class Member : IIdentifiable
     {
         public string Id { get; set; }
         public string Name { get; set; }

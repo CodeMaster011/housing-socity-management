@@ -10,7 +10,7 @@ namespace HSM.WebApp.Data.Models
             Amount = (ve-).
             Once payment is received from member, liability for that member account will be reduced.
     */
-    public class Transaction
+    public class Transaction : IIdentifiable
     {
         public string Id { get; set; }
         public DateTime? Date { get; set; }
@@ -34,7 +34,7 @@ namespace HSM.WebApp.Data.Models
         public string CreatedByUser { get; set; }
     }
 
-    public class Ledger
+    public class Ledger : IIdentifiable
     {
         public string Id { get; set; }
         public string Name { get; set; } // Maintenance, Maintenance-Due (L), Expense, Other Income, Deposit, Deposit-Due (L)
@@ -44,7 +44,7 @@ namespace HSM.WebApp.Data.Models
         public ICollection<Transaction> Transactions { get; set; }
     }
 
-    public class MemberAccount
+    public class MemberAccount : IIdentifiable
     {
         public string Id { get; set; }
         public string MemberId { get; set; }

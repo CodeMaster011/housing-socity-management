@@ -1,4 +1,5 @@
 @model HSM.WebApp.Data.Models.Member
+@inject ISmallIdService smallIdService
 @{
     ViewData["Title"] = "Member";
 }
@@ -9,9 +10,10 @@
 </div>
 
 <h2>@Model.Name</h2>
-@if(Model.MemberFrom.HasValue)
+<h6>@smallIdService.GetSmallId(Model)</h6>
+@if (Model.MemberFrom.HasValue)
 {
-    <h6>Member since, @Model.MemberFrom?.ToString("dd MMM, yyyy")</h6>
+    <div>Member since, @Model.MemberFrom?.ToString("dd MMM, yyyy")</div>
 }
 
 
@@ -49,4 +51,30 @@
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="mt-5">
+    <h3>Owned Units:</h3>
+    <table class="table table-strip">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Area</th>
+                <th>Rented Person</th>
+                <th>Rented Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach(var unit in Model.OwnedUnits)
+            {
+                <tr>
+                    <td><a href="/units/details/@unit.Id">@unit.Name</a></td>
+                    <td>@unit.Area Squrt Feet</td>
+                    <td>@unit.RentedPersonName</td>
+                    <td>@unit.RentedPersonPhone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/units/create?ownerId=@smallIdService.GetSmallId(Model)">Create Unit</a>
 </div>

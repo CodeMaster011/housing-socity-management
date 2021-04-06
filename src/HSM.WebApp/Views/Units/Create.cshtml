@@ -1,0 +1,54 @@
+@model HSM.WebApp.Data.Models.Unit
+@inject ISmallIdService smallIdService
+@{
+    ViewData["Title"] = "Unit";
+}
+
+
+<h4>Create new Unit</h4>
+
+<div>
+    <form method="post">
+        <div class="row">
+            <div class="col-12 col-lg-4 p-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Basic</h5>
+                        <div class="form-group">
+                            <label for="inputName">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="inputName" asp-for="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Area <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="inputArea" asp-for="Area">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Owner <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="inputOwnerId" asp-for="OwnerId">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 p-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Rented</h5>
+                        <div class="form-group">
+                            <label for="inputName">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="inputRentedPersonName" asp-for="RentedPersonName">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPhoneNumber">Phone</label>
+                            <input type="text" class="form-control" id="inputPhoneNumber" asp-for="RentedPersonPhone">
+                            <small id="phoneHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary mt-3" type="submit">Create Unit</button>
+    </form>
+</div>

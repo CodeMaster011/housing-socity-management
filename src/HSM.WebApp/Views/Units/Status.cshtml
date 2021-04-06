@@ -1,14 +1,18 @@
-@model StatusModel<Member>
+@model StatusModel<Unit>
 
 @{
-    ViewData["Title"] = "Member";
+    ViewData["Title"] = "Unit";
 }
 
 
 @if(Model.Errors == null || Model.Errors.Count == 0)
 {
   <div class="alert alert-success" role="alert">
-    @Model.Model.Name is succesfully created.
+    @Model.Model.Name is succesfully created
+      @if(Model.Model.Owner != null)
+        {
+          <span>With owner @Model.Model.Owner.Name</span>
+        }
   </div>
 } else
 {

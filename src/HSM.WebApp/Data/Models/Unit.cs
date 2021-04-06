@@ -2,7 +2,7 @@ using System;
 
 namespace HSM.WebApp.Data.Models
 {
-    public class Unit
+    public class Unit : IIdentifiable
     {
         public string Id { get; set; }
         public string Name { get; set; }

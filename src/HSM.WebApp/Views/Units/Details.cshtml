@@ -1,0 +1,46 @@
+@model HSM.WebApp.Data.Models.Unit
+@inject ISmallIdService smallIdService
+@{
+    ViewData["Title"] = "Unit";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Unit</h1>
+</div>
+
+<h2>@Model.Name</h2>
+<h6>@smallIdService.GetSmallId(Model)</h6>
+
+
+<div class="mt-5">
+    <h3>Owner Details:</h3>
+    <table class="table table-strip">
+        <tbody>
+            <tr>
+                <th>Owner</th>
+                <td>@Model.Owner?.Name</td>
+            </tr>
+            <tr>
+                <th>Area</th>
+                <td>@Model.Area Sqrt Feet</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-5">
+    <h3>Additional Details:</h3>
+    <table class="table table-strip">
+        <tbody>
+            <tr>
+                <th>Rented Person</th>
+                <td>@Model.RentedPersonName</td>
+            </tr>
+            <tr>
+                <th>Rented Phone</th>
+                <td>@Model.RentedPersonPhone</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
