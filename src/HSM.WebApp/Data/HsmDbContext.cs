@@ -10,6 +10,7 @@ namespace HSM.WebApp.Data
         public DbSet<Ledger> Ledgers { get; set; }
         public DbSet<MemberAccount> MemberAccounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TransactionPassthrough> TransactionPassthrough { get; set; }
 
         public HsmDbContext(DbContextOptions options) : base(options)
         {
