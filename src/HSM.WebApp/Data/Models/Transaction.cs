@@ -24,14 +24,30 @@ namespace HSM.WebApp.Data.Models
         public string LedgerId { get; set; }
         public Ledger Ledger { get; set; }
 
+        public string PassthroughId { get; set; }
+        public TransactionPassthrough Passthrough { get; set; }
+
         public string Description { get; set; }
         public string Tags { get; set; }
         public double Amount { get; set; } // Inflow = Ve+, Outflow = Ve-
         public bool IsDue { get; set; } // once true, no actual CFs occurred
+        public bool IsContra { get; set; }
 
         // ====== System Audit Data ======
         public DateTime? CreatedByUserOn { get; set; }
         public string CreatedByUser { get; set; }
+    }
+
+    public class TransactionPassthrough : IIdentifiable
+    {
+        public string Id { get; set; }
+        public string Name { get; set; } // Cash, Bank
+        public bool IsLocked { get; set; }
+
+        public double Balance { get; set; }
+        public DateTime? CalculatedOn { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
     }
 
     public class Ledger : IIdentifiable
@@ -40,6 +56,9 @@ namespace HSM.WebApp.Data.Models
         public string Name { get; set; } // Maintenance, Maintenance-Due (L), Expense, Other Income, Deposit, Deposit-Due (L)
         public bool IsDue { get; set; }
         public bool IsLocked { get; set; }
+
+        public double Balance { get; set; }
+        public DateTime? CalculatedOn { get; set; }
 
         public ICollection<Transaction> Transactions { get; set; }
     }
