@@ -1,0 +1,46 @@
+@model HSM.WebApp.Data.Models.Charges[]
+@{
+    ViewData["Title"] = "Charges";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Charges</h1>
+</div>
+
+<div>
+    <a class="btn btn-primary" href="/Charges/create" role="button">Create</a>
+</div>
+@* <div class="btn-group" role="group" aria-label="Basic example">
+    
+    <a class="btn btn-primary" href="#" role="button">Link</a>
+</div> *@
+
+
+@* card/ table *@
+<table class="mt-3 table">
+    <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>EffectiveFrom</th>
+        <th>OnArea</th>
+        <th>OnFlatAmount</th>
+        <th>MaxAmount</th>
+        <th>MinAmount</th>
+    </thead>
+    <tbody>
+        @{var x = 1;}
+        @foreach (var member in Model)
+        {
+            <tr>
+                <td>@x</td>
+                <td><a href="/member/details/@member.Id">@member.Name</a></td> @* links to details *@
+                <td>@member.EffectiveFrom?.ToString("dd MMM, yyyy")</td>
+                <td>@member.OnArea</td>
+                <td>@member.OnFlatAmount</td>
+                <td>@member.MaxAmount</td>
+                <td>@member.MinAmount</td>
+            </tr>
+            x++;
+        }
+    </tbody>
+</table>

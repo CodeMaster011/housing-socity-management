@@ -1,14 +1,14 @@
-@model HSM.WebApp.Data.Models.Member[]
+@model HSM.WebApp.Data.Models.TransactionPassthrough[]
 @{
-    ViewData["Title"] = "Member";
+    ViewData["Title"] = "Passthrough";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Members</h1>
+    <h1 class="display-4">Transaction Passthrough</h1>
 </div>
 
 <div>
-    <a class="btn btn-primary" href="/member/create" role="button">Create</a>
+    <a class="btn btn-primary" href="/TransactionPassthrough/create" role="button">Create</a>
 </div>
 @* <div class="btn-group" role="group" aria-label="Basic example">
     
@@ -21,18 +21,18 @@
     <thead>
         <th>#</th>
         <th>Name</th>
-        <th>Phone</th>
-        <th>EMail</th>
+        <th>IsLocked</th>
+        <th>Balance</th>
     </thead>
     <tbody>
         @{var x = 1;}
-        @foreach (var member in Model)
+        @foreach (var pt in Model)
         {
             <tr>
                 <td>@x</td>
-                <td><a href="/member/details/@member.Id">@member.Name</a></td> @* links to details *@
-                <td>@member.PhoneNumber</td>
-                <td>@member.EMail</td>
+                <td><a href="/TransactionPassthrough/details/@pt.Id">@pt.Name</a></td> @* links to details *@
+                <td>@pt.IsLocked</td>
+                <td>@pt.Balance</td>
             </tr>
             x++;
         }

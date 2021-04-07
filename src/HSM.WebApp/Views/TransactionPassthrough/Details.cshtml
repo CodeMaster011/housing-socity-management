@@ -1,80 +1,66 @@
-@model HSM.WebApp.Data.Models.Member
+@model HSM.WebApp.Data.Models.TransactionPassthrough
 @inject ISmallIdService smallIdService
 @{
-    ViewData["Title"] = "Member";
+    ViewData["Title"] = "Passthrough";
 }
 
 
 <div class="text-center">
-    <h1 class="display-4">Members</h1>
+    <h1 class="display-4">Passthrough</h1>
 </div>
 
 <h2>@Model.Name</h2>
-<h6>@smallIdService.GetSmallId(Model)</h6>
-@if (Model.MemberFrom.HasValue)
-{
-    <div>Member since, @Model.MemberFrom?.ToString("dd MMM, yyyy")</div>
-}
-
 
 <div class="mt-5">
-    <h3>Contracts Details:</h3>
+    <h3>Details:</h3>
     <table class="table table-strip">
         <tbody>
             <tr>
-                <th>Phone</th>
-                <td>@Model.PhoneNumber</td>
+                <th>Balance</th>
+                <td>@Model.Balance</td>
             </tr>
             <tr>
-                <th>E-Mail</th>
-                <td>@Model.EMail</td>
+                <th>CalculatedOn</th>
+                <td>@Model.CalculatedOn?.ToString("dd MMM, yyyy")</td>
+            </tr>
+            <tr>
+                <th>IsLocked</th>
+                <td>@Model.IsLocked</td>
             </tr>
         </tbody>
     </table>
 </div>
 
 <div class="mt-5">
-    <h3>Additional Details:</h3>
-    <table class="table table-strip">
-        <tbody>
-            <tr>
-                <th>Occupation</th>
-                <td>@Model.Occupation</td>
-            </tr>
-            <tr>
-                <th>Birthday on</th>
-                <td>@Model.DOB?.ToString("dd MMM, yyyy")</td>
-            </tr>
-            <tr>
-                <th>Originally From</th>
-                <td>@Model.OriginallyFrom</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="mt-5">
-    <h3>Owned Units:</h3>
+    <h3>Transactions:</h3>
     <table class="table table-strip">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Area</th>
-                <th>Rented Person</th>
-                <th>Rented Phone</th>
+                <th>#</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>IsDue</th>
+                <th>IsContra</th>
+                <th>Related</th>
             </tr>
         </thead>
         <tbody>
-           @foreach(var unit in Model.OwnedUnits)
+           @{var x = 1;}
+           @foreach(var tra in Model.Transactions)
             {
                 <tr>
-                    <td><a href="/units/details/@unit.Id">@unit.Name</a></td>
-                    <td>@unit.Area Squrt Feet</td>
-                    <td>@unit.RentedPersonName</td>
-                    <td>@unit.RentedPersonPhone</td>
+                    <td>@x</td>
+                    <td><a href="/units/details/@tra.Id">@tra.Date?.ToString("dd MMM, yyyy")</a></td>
+                    <td>@tra.Description</td>
+                    <td>@tra.Amount</td>
+                    <td>@tra.IsDue</td>
+                    <td>@tra.IsContra</td>
+                    <td>&nbsp;</td>
                 </tr>
+                x++;
             }
         </tbody>
     </table>
-    <a class="btn btn-primary" href="/units/create?ownerId=@smallIdService.GetSmallId(Model)">Create Unit</a>
+    @* <a class="btn btn-primary" href="/units/create?ownerId=@smallIdService.GetSmallId(Model)">Create Unit</a> *@
 </div>

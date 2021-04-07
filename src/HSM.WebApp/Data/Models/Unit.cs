@@ -17,4 +17,15 @@ namespace HSM.WebApp.Data.Models
         public string RentedPersonName { get; set; }
         public string RentedPersonPhone { get; set; }
     }
+
+    public class Charges : IIdentifiable
+    {
+        public string Id { get; set; }
+        public string Name { get; set; } // Maintenance, Deposit
+        public DateTime? EffectiveFrom { get; set; }
+        public double? OnArea { get; set; }
+        public double? OnFlatAmount { get; set; }
+        public double? MaxAmount { get; set; }
+        public double? MinAmount { get; set; }
+    }
 }

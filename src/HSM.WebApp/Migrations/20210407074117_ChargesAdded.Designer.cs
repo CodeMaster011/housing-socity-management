@@ -3,14 +3,16 @@ using System;
 using HSM.WebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HSM.WebApp.Migrations
 {
     [DbContext(typeof(HsmDbContext))]
-    partial class HsmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210407074117_ChargesAdded")]
+    partial class ChargesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

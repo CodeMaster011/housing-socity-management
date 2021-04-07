@@ -1,0 +1,39 @@
+@model HSM.WebApp.Data.Models.Charges
+@{
+    ViewData["Title"] = "Charges";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Charges</h1>
+</div>
+
+<h2>@Model.Name</h2>
+
+<div class="mt-5">
+    <h3>Details:</h3>
+    <table class="table table-strip">
+        <tbody>
+            <tr>
+                <th>EffectiveFrom</th>
+                <td>@Model.EffectiveFrom?.ToString("dd MMM, yyyy")</td>
+            </tr>
+            <tr>
+                <th>OnArea</th>
+                <td>@Model.OnArea</td>
+            </tr>
+            <tr>
+                <th>OnFlatAmount</th>
+                <td>@Model.OnFlatAmount</td>
+            </tr>
+            <tr>
+                <th>MaxAmount</th>
+                <td>@Model.MaxAmount</td>
+            </tr>
+            <tr>
+                <th>MinAmount</th>
+                <td>@Model.MinAmount</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

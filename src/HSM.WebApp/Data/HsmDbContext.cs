@@ -11,6 +11,7 @@ namespace HSM.WebApp.Data
         public DbSet<MemberAccount> MemberAccounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<TransactionPassthrough> TransactionPassthrough { get; set; }
+        public DbSet<Charges> Charges { get; set; }
 
         public HsmDbContext(DbContextOptions options) : base(options)
         {

@@ -4,20 +4,18 @@ using System.Threading.Tasks;
 using HSM.WebApp.Data;
 using HSM.WebApp.Data.Models;
 using HSM.WebApp.Models;
-using HSM.WebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace HSM.WebApp.Controllers
 {
-
-    public class LedgerController : Controller
+    public class ChargesController : Controller
     {
-        private readonly ILogger<LedgerController> _logger;
+        private readonly ILogger<ChargesController> _logger;
         private readonly HsmDbContext _dbContext;
 
-        public LedgerController(ILogger<LedgerController> logger, HsmDbContext dbContext)
+        public ChargesController(ILogger<ChargesController> logger, HsmDbContext dbContext)
         {
             _logger = logger;
             this._dbContext = dbContext;
@@ -25,7 +23,7 @@ namespace HSM.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await _dbContext.Ledgers
+            var model = await _dbContext.Charges
             .AsNoTracking()
                 .OrderBy(m => m.Name)
             .ToArrayAsync();
@@ -35,14 +33,14 @@ namespace HSM.WebApp.Controllers
 
         public IActionResult Create()
         {
-            return View(model: new Ledger {  });
+            return View(model: new Charges {  });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] Ledger model)
+        public async Task<IActionResult> Create([FromForm] Charges model)
         {
-            var status = new StatusModel<Ledger>
+            var status = new StatusModel<Charges>
             {
                 Model = model,
                 Errors = new System.Collections.Generic.List<string>()
@@ -50,7 +48,7 @@ namespace HSM.WebApp.Controllers
 
             // data validation to be done here
             if (string.IsNullOrEmpty(model.Name))
-                status.Errors.Add("Name of ledger is not specified.");
+                status.Errors.Add("Name of charges is not specified.");
             
             
 
@@ -58,7 +56,7 @@ namespace HSM.WebApp.Controllers
                 return View("Status", status);
 
             model.Id = Guid.NewGuid().ToString();
-            _dbContext.Ledgers.Add(model);
+            _dbContext.Charges.Add(model);
             try
             {
                 if (await _dbContext.SaveChangesAsync() <= 0)
@@ -76,16 +74,8 @@ namespace HSM.WebApp.Controllers
 
         public async Task<IActionResult> Details(string id)
         {
-            var unit = await _dbContext.Ledgers.AsNoTracking()
+            var unit = await _dbContext.Charges.AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == id);
-            
-           
-            var transactions = await _dbContext.Transactions.AsNoTracking()
-            .Where(t => t.LedgerId == id)
-                .OrderByDescending(t => t.Date)
-                .Take(30)
-                .ToArrayAsync();
-            unit.Transactions = transactions;
             
             return View(unit);
         }

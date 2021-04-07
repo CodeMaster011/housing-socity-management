@@ -1,0 +1,73 @@
+@model HSM.WebApp.Data.Models.Charges
+@{
+    ViewData["Title"] = "Charges";
+}
+
+<h4>Create new Charges</h1>
+
+<div>
+    <form method="post">
+        <div class="row">
+            <div class="col-12 col-lg-4 p-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Basic</h5>
+                        <div class="form-group">
+                            <label for="inputName">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="inputName" asp-for="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">EffectiveFrom</label>
+                            <input type="text" id="EffectiveFrom" class="form-control" id="EffectiveFrom" asp-for="EffectiveFrom">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-lg-4 p-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Calculation</h5>
+                        <div class="form-group">
+                            <label for="inputPhoneNumber">OnArea</label>
+                            <input type="text" class="form-control" id="OnArea" asp-for="OnArea">
+                            <small id="OnAreaHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPhoneNumber">OnFlatAmount</label>
+                            <input type="text" class="form-control" id="OnFlatAmount" asp-for="OnFlatAmount">
+                            <small id="OnFlatAmountHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPhoneNumber">MaxAmount</label>
+                            <input type="text" class="form-control" id="MaxAmount" asp-for="MaxAmount">
+                            <small id="MaxAmountHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPhoneNumber">MinAmount</label>
+                            <input type="text" class="form-control" id="MinAmount" asp-for="MinAmount">
+                            <small id="MinAmountHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary mt-3" type="submit">Create Member</button>
+    </form>
+</div>
+
+@section Scripts
+{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#EffectiveFrom").datepicker({
+                dateFormat: 'd/m/yy',
+            });
+        });
+    </script>
+}
