@@ -13,7 +13,7 @@ namespace HSM.WebApp.Data.Models
     public class Transaction : IIdentifiable
     {
         public string Id { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime? Date { get; set; } // required
 
         public string UnitId { get; set; }
         public Unit Unit { get; set; }
@@ -21,13 +21,13 @@ namespace HSM.WebApp.Data.Models
         public string AccountId { get; set; }
         public MemberAccount Account { get; set; }
 
-        public string LedgerId { get; set; }
+        public string LedgerId { get; set; } // required
         public Ledger Ledger { get; set; }
 
-        public string PassthroughId { get; set; }
+        public string PassthroughId { get; set; } // required
         public TransactionPassthrough Passthrough { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } // required
         public string Tags { get; set; }
         public double Amount { get; set; } // Inflow = Ve+, Outflow = Ve-
         public bool IsDue { get; set; } // once true, no actual CFs occurred
