@@ -1,0 +1,98 @@
+@model HSM.WebApp.Models.TransactionCreationModel
+@{
+    ViewData["Title"] = "Transaction";
+}
+
+<h4>Create new transaction</h1>
+
+<div>
+    <form method="post">
+        <div class="row">
+            <div class="col-12 col-lg-4 p-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Basic</h5>
+                        <div class="form-group">
+                            <label for="inputDescription">Description <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="inputDescription" asp-for="Model.Description">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date <span class="text-danger">*</span></label>
+                            <input type="text" id="dob" class="form-control" id="dob" asp-for="Model.Date">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLedgerId">Ledger <span class="text-danger">*</span></label>
+                            <select class="form-control" id="inputLedgerId" asp-for="Model.LedgerId">
+                                @foreach (var ledger in Model.Ledgers)
+                                {
+                                    <option value="@ledger.Id">@ledger.Name</option>
+                                }
+                            </select>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+@*             
+            <div class="col-12 col-lg-4 p-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Contact</h5>
+                        <div class="form-group">
+                            <label for="inputPhoneNumber">Phone</label>
+                            <input type="text" class="form-control" id="inputPhoneNumber" asp-for="PhoneNumber">
+                            <small id="phoneHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEMail">E-Mail</label>
+                            <input type="text" class="form-control" id="inputEMail" asp-for="EMail">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4 p-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Others</h5>
+                        <div class="form-group">
+                            <label for="inputOriginallyFrom">Originally From</label>
+                            <input type="text" class="form-control" id="inputOriginallyFrom" asp-for="OriginallyFrom">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputOccupation">Occupation</label>
+                            <input type="text" class="form-control" id="inputOccupation" asp-for="Occupation">
+                        </div>
+                        <div class="form-group">
+                            <label for="memberFrom">Member From</label>
+                            <input type="text" id="memberFrom" class="form-control" id="memberFrom" asp-for="MemberFrom" value='@DateTime.Now.ToString("d/M/y")'>
+                        </div>
+                    </div>
+                </div>
+            </div> *@
+        </div>
+
+        <button class="btn btn-primary mt-3" type="submit">Create Member</button>
+    </form>
+</div>
+
+@section Scripts
+{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#memberFrom").datepicker({
+                dateFormat: 'd/m/yy',
+            });
+        });
+        $(function () {
+            $("#dob").datepicker({
+                dateFormat: 'd/m/yy',
+            });
+        });
+    </script>
+}

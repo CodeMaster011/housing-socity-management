@@ -35,9 +35,25 @@ namespace HSM.WebApp.Controllers
             
             return View(model);
         }
-        public IActionResult Create([FromQuery]string mAccountId, [FromQuery]string unitId)
+        public async Task<IActionResult> Create([FromQuery]string mAccountId, [FromQuery]string unitId)
         {
-            return View(model: new Transaction { AccountId = mAccountId, UnitId = unitId });
+            TransactionCreationModel model = new TransactionCreationModel
+            {
+                Model = new Transaction { AccountId = mAccountId, UnitId = unitId }
+            };
+            model.Members = await _dbContext.Members.AsNoTracking()
+                .Include(m => m.Account)
+                .Include(m => m.OwnedUnits)
+                .OrderBy(m => m.Name)
+                .ToListAsync();
+            model.TransactionPassthroughs = await _dbContext.TransactionPassthrough.AsNoTracking()
+                .OrderBy(t => t.Name)
+                .ToListAsync();
+            model.Ledgers = await _dbContext.Ledgers.AsNoTracking()
+                .Where(l => !l.IsLocked)
+                .OrderBy(l => l.Name)
+                .ToListAsync();
+            return base.View(model: model);
         }
 
         [HttpPost]
