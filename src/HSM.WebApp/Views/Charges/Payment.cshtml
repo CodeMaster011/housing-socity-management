@@ -1,0 +1,69 @@
+@model HSM.WebApp.Models.ChargesPaymentModel
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h4>Charges Payment</h1>
+
+<div>
+    <form method="post">
+        <div class="form-group">
+            <label for="inputParticulars">Particulars <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="inputParticulars" asp-for="Particulars">
+        </div>
+        <div class="form-group">
+            <label for="dob">Date</label>
+            <input type="text" id="dob" class="form-control" id="dob" asp-for="Date">
+        </div>
+        <div class="form-group">
+            <label for="SelectedChargesId">Charges <span class="text-danger">*</span></label>
+            <select class="form-control" id="SelectedChargesId" asp-for="SelectedChargesId">
+                <option value="">None</option>
+                @foreach (var charge in Model.Charges)
+                {
+                    <option value="@charge.Id">@charge.Name</option>
+                }
+            </select>
+        </div>
+        <table class="table table-strip">
+            <tr>
+                <th>Unit</th>
+                <th>Charged</th>
+            </tr>
+            @{
+                for (int i = 0; i < Model.Units.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.Units[i].Unit.Owner.Name - @Model.Units[i].Unit.Name</td>
+                        <td>
+                            @Html.CheckBox("Units[" + i + "].IsSelected", Model.Units[@i].IsSelected)
+                            @Html.Hidden("Units[" + i + "].UnitId", Model.Units[@i].Unit.Id)
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+
+        <button class="btn btn-primary mt-3" type="submit">Charge</button>
+    </form>
+</div>
+
+
+@section Scripts
+{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#memberFrom").datepicker({
+                dateFormat: 'd/m/yy',
+            });
+        });
+        $(function () {
+            $("#dob").datepicker({
+                dateFormat: 'd/m/yy',
+            });
+        });
+    </script>
+}

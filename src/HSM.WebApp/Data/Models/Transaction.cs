@@ -61,6 +61,7 @@ namespace HSM.WebApp.Data.Models
         public DateTime? CalculatedOn { get; set; }
 
         public ICollection<Transaction> Transactions { get; set; }
+        public ICollection<Charges> Charges { get; set; }
     }
 
     public class MemberAccount : IIdentifiable

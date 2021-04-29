@@ -16,6 +16,7 @@ namespace HSM.WebApp.Data.Models
         public DateTime? RentedFrom { get; set; }
         public string RentedPersonName { get; set; }
         public string RentedPersonPhone { get; set; }
+        public string MeterNumber { get; set; }
     }
 
     public class Charges : IIdentifiable
@@ -27,5 +28,8 @@ namespace HSM.WebApp.Data.Models
         public double? OnFlatAmount { get; set; }
         public double? MaxAmount { get; set; }
         public double? MinAmount { get; set; }
+        
+        public Ledger Ledger { get; set; }
+        public string LedgerId { get; set; }
     }
 }
