@@ -28,6 +28,9 @@ namespace HSM.WebApp.Controllers
         {
             var model = await _dbContext.Transactions
             .AsNoTracking()
+                .Include(t => t.Unit)
+                .Include(t => t.Account)
+                    .ThenInclude(t => t.Member)
                 .OrderByDescending(m => m.Date)
                 .Skip(fromNum)
                 .Take(100)
@@ -53,13 +56,17 @@ namespace HSM.WebApp.Controllers
                 .Where(l => !l.IsLocked)
                 .OrderBy(l => l.Name)
                 .ToListAsync();
+            model.Units = await _dbContext.Units.AsNoTracking()
+                .OrderBy(m => m.Name)
+                .ToListAsync();
             return base.View(model: model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] Transaction model)
+        public async Task<IActionResult> Create([FromForm] TransactionCreationModel creationModel)
         {
+            var model = creationModel.Model;
             var status = new StatusModel<Transaction>
             {
                 Model = model,
@@ -71,6 +78,8 @@ namespace HSM.WebApp.Controllers
                 status.Errors.Add("Description of transaction is not specified.");
             if (!model.Date.HasValue)
                 status.Errors.Add("Date of transaction is not specified.");
+            if (model.Amount == 0d)
+                status.Errors.Add("Amount of transaction is not valid.");
             
             if(string.IsNullOrWhiteSpace(model.LedgerId))
             {
@@ -118,6 +127,8 @@ namespace HSM.WebApp.Controllers
             model.Unit = null;
             model.Ledger = null;
             model.Passthrough = null;
+
+            return Json(status);
 
             if (status.Errors.Count != 0)
                 return View("Status", status);

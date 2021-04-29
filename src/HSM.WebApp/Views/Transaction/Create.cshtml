@@ -17,42 +17,66 @@
                             <input type="text" class="form-control" id="inputDescription" asp-for="Model.Description">
                         </div>
                         <div class="form-group">
+                            <label for="inputAmount">Amount <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="inputAmount" asp-for="Model.Amount">
+                            <small id="inputAmountHelp" class="form-text text-muted">Use negative amount for expeneses. Positive for income.</small>
+                        </div>
+                        <div class="form-group">
                             <label for="dob">Date <span class="text-danger">*</span></label>
                             <input type="text" id="dob" class="form-control" id="dob" asp-for="Model.Date">
                         </div>
                         <div class="form-group">
                             <label for="inputLedgerId">Ledger <span class="text-danger">*</span></label>
                             <select class="form-control" id="inputLedgerId" asp-for="Model.LedgerId">
+                                <option value="">None</option>
                                 @foreach (var ledger in Model.Ledgers)
                                 {
                                     <option value="@ledger.Id">@ledger.Name</option>
                                 }
                             </select>
                         </div>
-                        
-                        
+                        <div class="form-group">
+                            <label for="passthroughId">Passthrough <span class="text-danger">*</span></label>
+                            <select class="form-control" id="passthroughId" asp-for="Model.PassthroughId">
+                                <option value="">None</option>
+                                @foreach (var pass in Model.TransactionPassthroughs)
+                                {
+                                    <option value="@pass.Id">@pass.Name</option>
+                                }
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-@*             
+             
             <div class="col-12 col-lg-4 p-1">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Contact</h5>
+                        <h5 class="card-title">Member Account</h5>
                         <div class="form-group">
-                            <label for="inputPhoneNumber">Phone</label>
-                            <input type="text" class="form-control" id="inputPhoneNumber" asp-for="PhoneNumber">
-                            <small id="phoneHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                            <label for="accountId">Account</label>
+                            <select class="form-control" id="accountId" asp-for="Model.AccountId">
+                                <option value="">None</option>
+                                @foreach (var member in Model.Members)
+                                {
+                                    <option value="@member.Account.Id">@member.Name</option>
+                                }
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="inputEMail">E-Mail</label>
-                            <input type="text" class="form-control" id="inputEMail" asp-for="EMail">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <label for="unitId">Unit</label>
+                            <select class="form-control" id="unitId" asp-for="Model.UnitId">
+                                <option value="">None</option>
+                                @foreach (var unit in Model.Units)
+                                {
+                                    <option value="@unit.Id">@unit.Name | @unit.Area SQT </option>
+                                }
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
-
+@*
             <div class="col-12 col-lg-4 p-1">
                 <div class="card">
                     <div class="card-body">

@@ -61,7 +61,7 @@ namespace HSM.WebApp.Controllers
             model.Account = null;
             model.LastUpdatedOn = DateTime.Now;
 
-            model.Account = new MemberAccount { Member = model };
+            model.Account = new MemberAccount { MemberId = model.Id, Id = Guid.NewGuid().ToString() };
             _dbContext.Members.Add(model);
             try
             {
@@ -96,22 +96,27 @@ namespace HSM.WebApp.Controllers
             return View(member);
         }
 
-        public async Task<IActionResult> AddMemberTransactionAccount(string memberId)
+        // [HttpGet("AddMemberTransactionAccount/{memberId}")]
+        public async Task<IActionResult> AddMemberTransactionAccount([FromRoute]string id)
         {
-            var member = await _dbContext.Members.AsNoTracking()
+            Console.WriteLine($"Member id: ({id})");
+            var member = await _dbContext.Members
                 .Include(m => m.Account)
-                .FirstOrDefaultAsync(m => m.Id == memberId);
+                .FirstOrDefaultAsync(m => m.Id == id);
+            // if (member == null) return NotFound();
+
             if (member.Account == null)
             {
                 _dbContext.MemberAccounts.Add(new MemberAccount
                 {
+                    Id = Guid.NewGuid().ToString(),
                     ActivatedOn = DateTime.Now,
                     Balance = 0d,
                     CalculatedOn = DateTime.Now,
-                    MemberId = memberId
+                    MemberId = id
                 });
                 if (await _dbContext.SaveChangesAsync() > 0)
-                    return RedirectToActionPermanent(nameof(Details),new { id = memberId });
+                    return RedirectToActionPermanent(nameof(Details),new { id = id });
             }
             return RedirectToActionPermanent(nameof(Index));
         }

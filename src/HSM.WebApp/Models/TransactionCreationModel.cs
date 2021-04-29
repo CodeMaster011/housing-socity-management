@@ -8,6 +8,6 @@ namespace HSM.WebApp.Models
         public List<Ledger> Ledgers { get; set; }
         public List<TransactionPassthrough> TransactionPassthroughs { get; set; }
         public List<Member> Members { get; set; }
-        // public List<Unit> Units { get; set; }
+        public List<Unit> Units { get; set; }
     }
 }

@@ -1,0 +1,55 @@
+@model HSM.WebApp.Models.AdministratorDashboardModel
+@{
+    ViewData["Title"] = "Administrator";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Administrator</h1>
+</div>
+
+<div class="mt-5">
+    <div class="d-flex flex-wrap">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><a href="/member/">Member</a></h5>
+                <p class="card-text">Members are people live in <strong>units</strong>. One member can have multiple units.</p>
+                <a class="mt-auto btn btn-light" href="/member/create" role="button">Create</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><a href="/units/">Unit</a></h5>
+                <p class="card-text">Units are places for which charges are applied.</p>
+                <a class="mt-auto btn btn-light" href="/units/create" role="button">Create</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><a href="/charges/">Charges</a></h5>
+                <p class="card-text">Charges are used for applying <i>dues</i> to <strong>members</strong>.</p>
+                <a class="mt-auto btn btn-light" href="/charges/create" role="button">Create</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><a href="/ledger/">Ledger</a></h5>
+                <p class="card-text">Ledgers are purpose for which any <strong>transaction</strong> took place.</p>
+                <a class="mt-auto btn btn-light" href="/ledger/create" role="button">Create</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><a href="/transactionPassthrough/">Passthrough</a></h5>
+                <p class="card-text">Passthroughs are cash/ bank in which any <strong>transaction</strong> took place.</p>
+                <a class="mt-auto btn btn-light" href="/transactionPassthrough/create" role="button">Create</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><a href="/transaction/">Transaction</a></h5>
+                <p class="card-text">Transactions are events for <strong>ledgers</strong> through <strong>passthroughs</strong>.</p>
+                <a class="mt-auto btn btn-light" href="/transaction/create" role="button">Create</a>
+            </div>
+        </div>
+    </div>
+</div>
